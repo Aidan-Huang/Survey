@@ -14,13 +14,16 @@
 		DD0C30171990C669000E65F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C30161990C669000E65F0 /* main.m */; };
 		DD0C301B1990C669000E65F0 /* surveyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C301A1990C669000E65F0 /* surveyAppDelegate.m */; };
 		DD0C301E1990C669000E65F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD0C301C1990C669000E65F0 /* Main.storyboard */; };
-		DD0C30211990C669000E65F0 /* surveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C30201990C669000E65F0 /* surveyViewController.m */; };
 		DD0C30231990C669000E65F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD0C30221990C669000E65F0 /* Images.xcassets */; };
 		DD0C302A1990C669000E65F0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0C30291990C669000E65F0 /* XCTest.framework */; };
 		DD0C302B1990C669000E65F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0C300A1990C668000E65F0 /* Foundation.framework */; };
 		DD0C302C1990C669000E65F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0C300E1990C668000E65F0 /* UIKit.framework */; };
 		DD0C30341990C669000E65F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD0C30321990C669000E65F0 /* InfoPlist.strings */; };
 		DD0C30361990C669000E65F0 /* surveyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C30351990C669000E65F0 /* surveyTests.m */; };
+		DD0C30411990C6C1000E65F0 /* SurveyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD0C30401990C6C1000E65F0 /* SurveyTableViewController.m */; };
+		DDAB49621991D1690049D970 /* Survey.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAB49611991D1690049D970 /* Survey.m */; };
+		DDAB49651991D1F20049D970 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAB49641991D1F20049D970 /* Question.m */; };
+		DDAB49681991D3180049D970 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAB49671991D3180049D970 /* Answer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +48,20 @@
 		DD0C30191990C669000E65F0 /* surveyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = surveyAppDelegate.h; sourceTree = "<group>"; };
 		DD0C301A1990C669000E65F0 /* surveyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = surveyAppDelegate.m; sourceTree = "<group>"; };
 		DD0C301D1990C669000E65F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DD0C301F1990C669000E65F0 /* surveyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = surveyViewController.h; sourceTree = "<group>"; };
-		DD0C30201990C669000E65F0 /* surveyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = surveyViewController.m; sourceTree = "<group>"; };
 		DD0C30221990C669000E65F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DD0C30281990C669000E65F0 /* surveyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = surveyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0C30291990C669000E65F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DD0C30311990C669000E65F0 /* surveyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "surveyTests-Info.plist"; sourceTree = "<group>"; };
 		DD0C30331990C669000E65F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DD0C30351990C669000E65F0 /* surveyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = surveyTests.m; sourceTree = "<group>"; };
+		DD0C303F1990C6C1000E65F0 /* SurveyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SurveyTableViewController.h; sourceTree = "<group>"; };
+		DD0C30401990C6C1000E65F0 /* SurveyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SurveyTableViewController.m; sourceTree = "<group>"; };
+		DDAB49601991D1690049D970 /* Survey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Survey.h; sourceTree = "<group>"; };
+		DDAB49611991D1690049D970 /* Survey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Survey.m; sourceTree = "<group>"; };
+		DDAB49631991D1F20049D970 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		DDAB49641991D1F20049D970 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		DDAB49661991D3180049D970 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		DDAB49671991D3180049D970 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +121,10 @@
 		DD0C30101990C668000E65F0 /* survey */ = {
 			isa = PBXGroup;
 			children = (
-				DD0C30191990C669000E65F0 /* surveyAppDelegate.h */,
-				DD0C301A1990C669000E65F0 /* surveyAppDelegate.m */,
+				DDAB495F1991D07B0049D970 /* Model */,
 				DD0C301C1990C669000E65F0 /* Main.storyboard */,
-				DD0C301F1990C669000E65F0 /* surveyViewController.h */,
-				DD0C30201990C669000E65F0 /* surveyViewController.m */,
+				DD0C303F1990C6C1000E65F0 /* SurveyTableViewController.h */,
+				DD0C30401990C6C1000E65F0 /* SurveyTableViewController.m */,
 				DD0C30221990C669000E65F0 /* Images.xcassets */,
 				DD0C30111990C668000E65F0 /* Supporting Files */,
 			);
@@ -126,6 +134,8 @@
 		DD0C30111990C668000E65F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DD0C30191990C669000E65F0 /* surveyAppDelegate.h */,
+				DD0C301A1990C669000E65F0 /* surveyAppDelegate.m */,
 				DD0C30121990C668000E65F0 /* survey-Info.plist */,
 				DD0C30131990C668000E65F0 /* InfoPlist.strings */,
 				DD0C30161990C669000E65F0 /* main.m */,
@@ -150,6 +160,19 @@
 				DD0C30321990C669000E65F0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDAB495F1991D07B0049D970 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDAB49601991D1690049D970 /* Survey.h */,
+				DDAB49611991D1690049D970 /* Survey.m */,
+				DDAB49631991D1F20049D970 /* Question.h */,
+				DDAB49641991D1F20049D970 /* Question.m */,
+				DDAB49661991D3180049D970 /* Answer.h */,
+				DDAB49671991D3180049D970 /* Answer.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +274,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD0C301B1990C669000E65F0 /* surveyAppDelegate.m in Sources */,
-				DD0C30211990C669000E65F0 /* surveyViewController.m in Sources */,
+				DDAB49681991D3180049D970 /* Answer.m in Sources */,
+				DDAB49621991D1690049D970 /* Survey.m in Sources */,
+				DDAB49651991D1F20049D970 /* Question.m in Sources */,
 				DD0C30171990C669000E65F0 /* main.m in Sources */,
+				DD0C30411990C6C1000E65F0 /* SurveyTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +483,7 @@
 				DD0C303B1990C669000E65F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD0C303C1990C669000E65F0 /* Build configuration list for PBXNativeTarget "surveyTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +492,7 @@
 				DD0C303E1990C669000E65F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

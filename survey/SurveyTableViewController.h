@@ -1,5 +1,5 @@
 //
-//  surveyViewController.h
+//  SurveyTableViewController.h
 //  survey
 //
 //  Created by Aidan on 8/5/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface surveyViewController : UIViewController
+@interface SurveyTableViewController : UITableViewController
 
 @end
