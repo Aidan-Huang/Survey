@@ -10,6 +10,19 @@
 
 @implementation Answer
 
+- (instancetype)initWithAnswer:(NSString *)answer
+{
+    self = [super init];
+    
+    if (self) {
+        
+        self.ansewer = answer;
+    }
+    
+    return self;
+}
+
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@:%i", self.ansewer, self.isSelected];

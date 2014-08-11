@@ -17,6 +17,9 @@
 @property (strong, nonatomic) NSMutableArray *questions;
 @property (nonatomic, getter=isEnable) BOOL enable;
 
+
+- (instancetype)initWithTitle:(NSString *)title;
+
 - (Question *) getQuestionAt:(NSInteger) index;
 
 

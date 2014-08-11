@@ -15,4 +15,6 @@
 @property (nonatomic, getter=isSelected) BOOL selected;
 
 
+- (instancetype)initWithAnswer:(NSString *)answer;
+
 @end

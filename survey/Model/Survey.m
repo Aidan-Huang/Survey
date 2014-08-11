@@ -10,6 +10,23 @@
 
 @implementation Survey
 
+- (instancetype)initWithTitle:(NSString *)title
+{
+    self = [super init];
+    
+    if (self) {
+        
+        self.title = title;
+    }
+    
+    return self;
+}
+- (void)addQuestion:(NSString *)question withType:(QuestionType) questionType
+{
+    [self.questions addObject:[[Question alloc] initWithQuestion:question withType:questionType]];
+}
+
+
 - (NSMutableArray *)questions{
     if (!_questions) {
         _questions = [[NSMutableArray alloc] init];

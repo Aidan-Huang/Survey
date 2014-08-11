@@ -10,6 +10,21 @@
 
 @implementation Question
 
+- (instancetype)initWithQuestion:(NSString *)question
+                        withType:(QuestionType) quetionType
+{
+    self = [super init];
+    
+    if (self) {
+        
+        self.question = question;
+        self.type = quetionType;
+    }
+    
+    return self;
+}
+
+
 - (NSString *)description
 {
     
@@ -20,6 +35,7 @@
         
         str = [str stringByAppendingFormat:@"\n%@",answer];
     }
+
     
     return str;
     
@@ -30,10 +46,16 @@
     return (Answer *)self.answers[index];
 }
 
+- (void)addAnswer:(NSString *)answer
+{
+    
+    [self.answers addObject:[[Answer alloc] initWithAnswer:answer]];
+}
+
 
 + (NSArray *)typeStrings{
     
-    return @[@"SingleSelect", @"MultiSelect"];
+    return @[@"Single", @"Multiple", @"Default"];
 }
 
 - (NSMutableArray *)answers{
@@ -49,9 +71,16 @@
     if(index > [self.answers count] - 1){
         return;
     }
+    
+    //单选问题不取消已经选中的选项
+    if(self.type == QuestionTypeSingleSelection && selected == NO){
+        
+        return;
+    }
+
 
     //若问题单选，且设置为选中，则先把所有答案设为没有选中
-    if(self.type == QUESTION_TYPE_SINGLE && selected == YES){
+    if(self.type == QuestionTypeSingleSelection && selected == YES){
         
         for (Answer *answer in self.answers){
             answer.selected = NO;
@@ -62,6 +91,56 @@
     [self getAnswerAt:index].selected = selected;
     
 }
+/*
+当选择某个答案时，返回需要设置的变化了，二维数组，第一行是需要设置选中的行号，第二行是需要设置取消的行号
+
+选择的行         单选题                          多选题
+已经选择的       无变化                           该行取消
+未选择的         该行选中，原先选中的行取消          该行选中
+ */
+- (NSArray *)getNeedSelectAnswersWhenSelectedAt:(NSInteger) index
+{
+    
+    NSMutableArray *needSelect = [[NSMutableArray alloc] init];
+    
+    Answer *answer = [self getAnswerAt:index];
+    
+    if (answer.isSelected == NO) {
+        [needSelect addObject:[NSNumber numberWithLong:index]];
+    }
+    return needSelect;
+}
+
+- (NSArray *)getNeedCancelSelectAnswersWhenSelectedAt:(NSInteger) index
+{
+    
+    NSMutableArray *needCancelSelect = [[NSMutableArray alloc] init];
+    
+    Answer *currentAnswer = [self getAnswerAt:index];
+    
+    if (currentAnswer.isSelected == YES && self.type == QuestionTypeMultipleSelection){
+        
+        [needCancelSelect addObject:[NSNumber numberWithLong:index]];
+        
+    }else if (currentAnswer.isSelected == NO && self.type == QuestionTypeSingleSelection){
+        
+        for(int i=0; i<[self.answers count]; i++){
+            
+            Answer *answer = [self getAnswerAt:i];
+            
+            if(answer.isSelected == YES){
+                [needCancelSelect addObject:[NSNumber numberWithInt:i]];
+                break;
+            }
+        }
+        
+    }
+    
+    return needCancelSelect;
+}
+
+
+
 
 - (void)selectAnswerAt:(NSInteger) index
 {

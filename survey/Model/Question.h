@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#define QUESTION_TYPE_SINGLE    0
-#define QUESTION_TYPE_MULTIPLE  1
+
+typedef NS_ENUM(NSInteger, QuestionType) {
+    QuestionTypeSingleSelection,
+    QuestionTypeMultipleSelection,
+    QuestionTypeDefault = QuestionTypeSingleSelection
+};
+
 
 @interface Question : NSObject
 
@@ -17,7 +22,7 @@
 
 @property (strong, nonatomic) NSMutableArray *answers;
 
-@property (nonatomic) NSInteger type;
+@property (nonatomic) QuestionType type;
 
 + (NSArray *)typeStrings;
 
@@ -26,5 +31,13 @@
 - (void)selectAnswerAt:(NSInteger) index;
 - (void)cancelSelectAnswerAt:(NSInteger) index;
 - (void)changAnswerAt:(NSInteger) index;
+
+- (NSArray *)getNeedSelectAnswersWhenSelectedAt:(NSInteger) index;
+- (NSArray *)getNeedCancelSelectAnswersWhenSelectedAt:(NSInteger) index;
+
+- (instancetype)initWithQuestion:(NSString *)question
+                        withType:(QuestionType) quetionType;
+
+- (void)addAnswer:(NSString *)answer;
 
 @end

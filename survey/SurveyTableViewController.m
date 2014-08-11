@@ -6,6 +6,13 @@
 //  Copyright (c) 2014 aidan. All rights reserved.
 //
 
+#define RGBAColor(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define RGBColor(r,g,b) RGBAColor(r,g,b,1.0)
+
+#define SELECTED_COLOR RGBColor(255, 127, 0)
+
+//RGBColor(255, 127, 0)
+
 #import "SurveyTableViewController.h"
 
 
@@ -41,12 +48,11 @@ Survey *_survey;
     
     _survey = [self getTestSurvey];
     
-    NSLog(@"%@", _survey);
+//    NSLog(@"%@", _survey);
     
     self.navigationItem.title = _survey.title;
     
-    [self.tableView reloadData];
-    
+//    [self.tableView reloadData];
     
 }
 
@@ -57,6 +63,10 @@ Survey *_survey;
 }
 
 #pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -84,32 +94,58 @@ Survey *_survey;
     
 //    NSLog(@"%@", question);
     
-    Answer *answer = [[_survey getQuestionAt:indexPath.section] getAnswerAt:indexPath.row];
+    Answer *answer = [question getAnswerAt:indexPath.row];
     
 //    NSLog(@"%@", answer);
     
     cell.textLabel.text = answer.ansewer;
+    
+    
 //    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     
+//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    if(answer.isSelected){
+//    [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Divider_line@2x.png"]]];
     
-//        cell.accessoryType =  UITableViewCellAccessoryCheckmark;
     
-        cell.backgroundColor = [UIColor orangeColor];
-        
-//        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    }else{
-        
-//        cell.accessoryType =  UITableViewCellAccessoryNone;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-    }
+    
+//       #define cellHeight 44 // You can change according to your req.<br>
+//       #define cellWidth 320 // You can change according to your req.<br>
+//    
+//            UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"divider_line"]];
+//            imgView.frame = CGRectMake(0, cellHeight, cellWidth, 3);
+//            [cell.contentView addSubview:imgView];
+//    
+  
+    
+    UIView *backgroundView = [[UIView alloc] init];
+    
+    backgroundView.backgroundColor =  SELECTED_COLOR;
+
+    
+    cell.selectedBackgroundView = backgroundView;
+    
+//    if(answer.isSelected){
+//    
+////        cell.accessoryType =  UITableViewCellAccessoryCheckmark;
+//    
+//        cell.backgroundColor = [UIColor orangeColor];
+//        
+////        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+//    }else{
+//        
+////        cell.accessoryType =  UITableViewCellAccessoryNone;
+////        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.backgroundColor = [UIColor clearColor];
+//    }
     
 //    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    
+
     
     
     return cell;
@@ -140,14 +176,34 @@ Survey *_survey;
 {
     
     Question *question = [_survey getQuestionAt:indexPath.section];
-
+    
+    
+    NSArray *needSelect = [question getNeedSelectAnswersWhenSelectedAt:indexPath.row];
+    NSArray *needCancelSelect = [question getNeedCancelSelectAnswersWhenSelectedAt:indexPath.row];
+    NSLog(@"needSelect:%@, needCancel:%@", needSelect, needCancelSelect);
+    
+    for (NSNumber *num in needSelect){
+    
+        
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
+                                    animated:YES
+                              scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+    for (NSNumber *num in needCancelSelect){
+        
+        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
+                                      animated:YES];
+    }
+    
+    
     [question changAnswerAt:indexPath.row];
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     
-    NSLog(@"%@", _survey);
+//    NSLog(@"%@", _survey);
+    
 
-    
 }
 
 //- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -217,51 +273,42 @@ Survey *_survey;
 
 - (Survey *) getTestSurvey{
     
-    Question *question1 = [[Question alloc] init];
+    Question *question1 = [[Question alloc] initWithQuestion:@"Which animal do you like?"
+                                                    withType:QuestionTypeMultipleSelection];
     
-    question1.question = @"Which animal do you like?";
-    question1.type = QUESTION_TYPE_MULTIPLE;
+    [question1 addAnswer:@"I like cat"];
+    [question1 addAnswer:@"I like dog"];
+    [question1 addAnswer:@"I like horse"];
+   
+    
+    
+    
+    Question *question2 = [[Question alloc] initWithQuestion:@"How old are you?"
+                                                     withType:QuestionTypeSingleSelection];
+
+    [question2 addAnswer:@"I am over 18 years"];
+    [question2 addAnswer:@"I am under 18"];
+    
+    
+    Question *question3 = [[Question alloc] initWithQuestion:@"test question"
+                                                    withType:QuestionTypeSingleSelection];
+    
+    [question3 addAnswer:@"answer 1"];
+    [question3 addAnswer:@"answer 2"];
+    [question3 addAnswer:@"answer 3"];
+    [question3 addAnswer:@"answer 4"];
+    [question3 addAnswer:@"answer 5"];
 
 
-    Answer *answer11 = [[Answer alloc] init];
-    answer11.ansewer = @"I like cat";
-    
-    Answer *answer12 = [[Answer alloc] init];
-    answer12.ansewer = @"I like dog";
-    answer12.selected = YES;
     
     
-    Answer *answer13 = [[Answer alloc] init];
-    answer13.ansewer = @"I like horse";
+    Survey *survey = [[Survey alloc] initWithTitle:@"Test Survey"];
     
-    
-    [question1.answers addObject:answer11];
-    [question1.answers addObject:answer12];
-    [question1.answers addObject:answer13];
-    
-    
-    
-    Question *question2 = [[Question alloc] init];
-    
-    question2.question = @"How old are you?";
-
-    Answer *answer21 = [[Answer alloc] init];
-    answer21.ansewer = @"I am over 18 years";
-    
-    Answer *answer22 = [[Answer alloc] init];
-    answer22.ansewer = @"I am under 18";
-    
-    [question2.answers addObject:answer21];
-    [question2.answers addObject:answer22];
-
-    
-    Survey *survey = [[Survey alloc] init];
-    
-    survey.title = @"Test Survey";
     survey.details = @"this is a test survey use for debug";
     
     [survey.questions addObject:question1];
     [survey.questions addObject:question2];
+    [survey.questions addObject:question3];
     
     
     return survey;
