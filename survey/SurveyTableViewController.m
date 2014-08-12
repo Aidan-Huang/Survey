@@ -99,54 +99,18 @@ Survey *_survey;
 //    NSLog(@"%@", answer);
     
     cell.textLabel.text = answer.ansewer;
-    
-    
-//    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
-//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-//    [tableView setSeparatorColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"Divider_line@2x.png"]]];
-    
-    
-    
-//       #define cellHeight 44 // You can change according to your req.<br>
-//       #define cellWidth 320 // You can change according to your req.<br>
-//    
-//            UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"divider_line"]];
-//            imgView.frame = CGRectMake(0, cellHeight, cellWidth, 3);
-//            [cell.contentView addSubview:imgView];
-//    
-  
-    
-    UIView *backgroundView = [[UIView alloc] init];
-    
-    backgroundView.backgroundColor =  SELECTED_COLOR;
 
     
-    cell.selectedBackgroundView = backgroundView;
     
-//    if(answer.isSelected){
-//    
-////        cell.accessoryType =  UITableViewCellAccessoryCheckmark;
-//    
-//        cell.backgroundColor = [UIColor orangeColor];
-//        
-////        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-//    }else{
-//        
-////        cell.accessoryType =  UITableViewCellAccessoryNone;
-////        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.backgroundColor = [UIColor clearColor];
-//    }
+    UIView *backView = [[UIView alloc] init];
     
-//    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    backView.backgroundColor = SELECTED_COLOR;
     
+    backView.frame = CGRectInset(cell.bounds, 1, 1);
     
-
+    [cell.selectedBackgroundView addSubview:backView];
     
+ 
     
     return cell;
 }
