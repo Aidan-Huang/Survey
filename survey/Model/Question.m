@@ -159,5 +159,36 @@
     [self setAnswerSelectedAt:index :!answer.isSelected];
 }
 
+- (BOOL) isAnswered
+{
+    for (Answer *answer in self.answers){
+        
+        if (answer.isSelected) return YES;
+    }
+    
+    return  NO;
+}
+
+- (NSString *)getSelectedAnswers
+{
+    
+    NSString *rtStr = @"";
+        
+    for (int i=0;i<[self.answers count];i++){
+        Answer *answer = [self getAnswerAt:i];
+        if (answer.isSelected){
+            rtStr = [rtStr stringByAppendingFormat:@",%i", i];
+        }
+    }
+    
+    
+    if ([rtStr hasPrefix:@","]){
+        rtStr = [rtStr substringFromIndex:1];
+    }
+    
+    return rtStr;
+    
+}
+
 
 @end

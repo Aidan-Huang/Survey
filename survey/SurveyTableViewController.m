@@ -99,18 +99,18 @@ Survey *_survey;
 //    NSLog(@"%@", answer);
     
     cell.textLabel.text = answer.ansewer;
+    
+    
+    if(answer.isSelected){
+        
+        cell.backgroundColor = SELECTED_COLOR;
+        
+    } else {
+        
+        cell.backgroundColor = [UIColor clearColor];
+    }
 
-    
-    
-    UIView *backView = [[UIView alloc] init];
-    
-    backView.backgroundColor = SELECTED_COLOR;
-    
-    backView.frame = CGRectInset(cell.bounds, 1, 1);
-    
-    [cell.selectedBackgroundView addSubview:backView];
-    
- 
+
     
     return cell;
 }
@@ -140,33 +140,33 @@ Survey *_survey;
 {
     
     Question *question = [_survey getQuestionAt:indexPath.section];
-    
-    
-    NSArray *needSelect = [question getNeedSelectAnswersWhenSelectedAt:indexPath.row];
-    NSArray *needCancelSelect = [question getNeedCancelSelectAnswersWhenSelectedAt:indexPath.row];
-    NSLog(@"needSelect:%@, needCancel:%@", needSelect, needCancelSelect);
-    
-    for (NSNumber *num in needSelect){
-    
-        
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
-                                    animated:YES
-                              scrollPosition:UITableViewScrollPositionNone];
-    }
-    
-    for (NSNumber *num in needCancelSelect){
-        
-        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
-                                      animated:YES];
-    }
-    
-    
+//
+//    
+//    NSArray *needSelect = [question getNeedSelectAnswersWhenSelectedAt:indexPath.row];
+//    NSArray *needCancelSelect = [question getNeedCancelSelectAnswersWhenSelectedAt:indexPath.row];
+////    NSLog(@"needSelect:%@, needCancel:%@", needSelect, needCancelSelect);
+//    
+//    for (NSNumber *num in needSelect){
+//    
+//        
+//        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
+//                                    animated:YES
+//                              scrollPosition:UITableViewScrollPositionNone];
+//    }
+//    
+//    for (NSNumber *num in needCancelSelect){
+//        
+//        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:num.intValue inSection:indexPath.section]
+//                                      animated:YES];
+//    }
+//    
+//    
     [question changAnswerAt:indexPath.row];
     
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
     
-//    NSLog(@"%@", _survey);
-    
+    NSLog(@"%@", _survey);
+    NSLog(@"selected answers are (%@)", _survey.getSelectedAnswers);
 
 }
 
@@ -243,6 +243,11 @@ Survey *_survey;
     [question1 addAnswer:@"I like cat"];
     [question1 addAnswer:@"I like dog"];
     [question1 addAnswer:@"I like horse"];
+    
+    [question1 getAnswerAt:1].selected = YES;
+    [question1 getAnswerAt:2].selected = YES;
+    
+//    NSLog(@"q1 select is:%@", question1.getSelectedAnswers);
    
     
     
@@ -262,6 +267,8 @@ Survey *_survey;
     [question3 addAnswer:@"answer 3"];
     [question3 addAnswer:@"answer 4"];
     [question3 addAnswer:@"answer 5"];
+    
+    
 
 
     

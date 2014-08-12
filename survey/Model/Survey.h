@@ -22,5 +22,7 @@
 
 - (Question *) getQuestionAt:(NSInteger) index;
 
+- (NSString *)getSelectedAnswers;
+
 
 @end

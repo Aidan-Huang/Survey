@@ -54,4 +54,22 @@
     return (Question *)self.questions[index];
 }
 
+- (NSString *)getSelectedAnswers{
+    
+    NSString *rtStr = @"";
+    
+    for (int i=0;i<[self.questions count];i++){
+        Question *question = [self getQuestionAt:i];
+        
+        rtStr = [rtStr stringByAppendingFormat:@";%@",question.getSelectedAnswers];
+    }
+    
+    if ([rtStr hasPrefix:@";"]){
+        rtStr = [rtStr substringFromIndex:1];
+    }
+    
+    return rtStr;
+
+}
+
 @end

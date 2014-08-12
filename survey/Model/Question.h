@@ -28,6 +28,9 @@ typedef NS_ENUM(NSInteger, QuestionType) {
 
 - (Answer *)getAnswerAt:(NSInteger) index;
 
+- (BOOL) isAnswered;
+- (NSString *)getSelectedAnswers;
+
 - (void)selectAnswerAt:(NSInteger) index;
 - (void)cancelSelectAnswerAt:(NSInteger) index;
 - (void)changAnswerAt:(NSInteger) index;
