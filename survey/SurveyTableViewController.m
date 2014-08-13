@@ -25,6 +25,7 @@ Survey *_survey;
 
 @implementation SurveyTableViewController
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -46,13 +47,11 @@ Survey *_survey;
     
     self.navigationController.navigationBarHidden = false;
     
-    _survey = [self getTestSurvey];
+    [self getSurveyFromJSON];
+    
     
 //    NSLog(@"%@", _survey);
     
-    self.navigationItem.title = _survey.title;
-    
-//    [self.tableView reloadData];
     
 }
 
@@ -170,70 +169,102 @@ Survey *_survey;
 
 }
 
-//- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
 
-//- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-//    // Add your Colour.
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    [self setCellColor:[UIColor redColor] ForCell:cell];  //highlight colour
-//    
-//}
-//
-//- (void)setCellColor:(UIColor *)color ForCell:(UITableViewCell *)cell {
-//    cell.contentView.backgroundColor = color;
-//    cell.backgroundColor = color;
-//}
+- (void) getSurveyFromJSON{
+    
+    static NSString * const BaseURLString = @"http://bns.idealbiz.com.cn:8080/";
+    
+    NSString *string = [NSString stringWithFormat:@"%@survey.json", BaseURLString];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // 3
+        //        self.weather = (NSDictionary *)responseObject;
+        
+        
+        NSDictionary *surveyDict = (NSDictionary *)responseObject;
+        
+        NSLog(@"jsonDic is:%@", surveyDict);
+        
+        _survey = [self CreateFromJSONDiction:surveyDict];
+        
+        
+        NSLog(@"receive survey is:%@", _survey);
+        
+        
+        self.navigationItem.title = @"JSON Retrieved";
+//        self.navigationItem.title = _survey.title;
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    [operation start];
+
+
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (Survey *) CreateFromJSONDiction:(NSDictionary *)surveyDict
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+    
+    Survey *survey = [[Survey alloc] init];
+    
+    survey.title = surveyDict[@"title"];
+    
+    survey.details = surveyDict[@"detail"];
+    
+    NSArray *questionsArray = surveyDict[@"questions"];
+    
+    [questionsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *questionDict=obj;
+        Question *question=[[Question alloc] init];
+        
+        question.question = questionDict[@"question"];
+        
+        question.type = QuestionTypeDefault;
+        
+        if ([questionDict[@"type"] isEqualToString:@"multiple"]){
+            question.type = QuestionTypeMultipleSelection;
+        }
+        
+        NSArray *answersArray=questionDict[@"answers"];
+        
+        [answersArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
+            NSDictionary *answerDict = obj;
+            Answer *answer = [[Answer alloc] init];
+            
+            answer.ansewer = answerDict[@"answer"];
+            
+            [question.answers addObject:answer];
+            
+        }];
+        
+        [survey.questions addObject:question];
+        
+    }];
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+    return survey;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (Survey *) getTestSurvey{
     
@@ -250,8 +281,6 @@ Survey *_survey;
 //    NSLog(@"q1 select is:%@", question1.getSelectedAnswers);
    
     
-    
-    
     Question *question2 = [[Question alloc] initWithQuestion:@"How old are you?"
                                                      withType:QuestionTypeSingleSelection];
 
@@ -267,10 +296,6 @@ Survey *_survey;
     [question3 addAnswer:@"answer 3"];
     [question3 addAnswer:@"answer 4"];
     [question3 addAnswer:@"answer 5"];
-    
-    
-
-
     
     
     Survey *survey = [[Survey alloc] initWithTitle:@"Test Survey"];
