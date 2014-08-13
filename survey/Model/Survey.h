@@ -18,6 +18,7 @@
 @property (nonatomic, getter=isEnable) BOOL enable;
 
 
+- (id)initWithDictionary:(NSDictionary*)dict;
 - (instancetype)initWithTitle:(NSString *)title;
 
 - (Question *) getQuestionAt:(NSInteger) index;

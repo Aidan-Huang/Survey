@@ -10,11 +10,11 @@
 
 @interface Answer : NSObject
 
-@property (strong, nonatomic) NSString *ansewer;
+@property (strong, nonatomic) NSString *answer;
 
 @property (nonatomic, getter=isSelected) BOOL selected;
 
-
+- (id)initWithDictionary:(NSDictionary*)dict;
 - (instancetype)initWithAnswer:(NSString *)answer;
 
 @end

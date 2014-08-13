@@ -10,13 +10,22 @@
 
 @implementation Answer
 
+- (id)initWithDictionary:(NSDictionary*)dict
+{
+    if (self = [super init])
+    {
+        self.answer = [dict objectForKey:@"answer"];
+    }
+    return self;
+}
+
 - (instancetype)initWithAnswer:(NSString *)answer
 {
     self = [super init];
     
     if (self) {
         
-        self.ansewer = answer;
+        self.answer = answer;
     }
     
     return self;
@@ -25,7 +34,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@:%i", self.ansewer, self.isSelected];
+    return [NSString stringWithFormat:@"%@:%i", self.answer, self.isSelected];
 }
 
 

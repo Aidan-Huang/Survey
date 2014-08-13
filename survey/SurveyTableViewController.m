@@ -97,7 +97,7 @@ Survey *_survey;
     
 //    NSLog(@"%@", answer);
     
-    cell.textLabel.text = answer.ansewer;
+    cell.textLabel.text = answer.answer;
     
     
     if(answer.isSelected){
@@ -194,7 +194,9 @@ Survey *_survey;
         
         NSLog(@"jsonDic is:%@", surveyDict);
         
-        _survey = [self CreateFromJSONDiction:surveyDict];
+//        _survey = [self CreateFromJSONDiction:surveyDict];
+        
+        _survey = [[Survey alloc] initWithDictionary:surveyDict];
         
         
         NSLog(@"receive survey is:%@", _survey);
@@ -252,7 +254,7 @@ Survey *_survey;
             NSDictionary *answerDict = obj;
             Answer *answer = [[Answer alloc] init];
             
-            answer.ansewer = answerDict[@"answer"];
+            answer.answer = answerDict[@"answer"];
             
             [question.answers addObject:answer];
             

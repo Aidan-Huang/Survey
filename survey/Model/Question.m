@@ -10,6 +10,32 @@
 
 @implementation Question
 
+- (id)initWithDictionary:(NSDictionary*)dict
+{
+    if (self = [super init])
+    {
+        self.question = [dict objectForKey:@"question"];
+        
+        self.type = QuestionTypeDefault;
+        
+        if ([dict[@"type"] isEqualToString:@"multiple"]){
+            self.type = QuestionTypeMultipleSelection;
+        }
+
+        
+        NSArray* rawArray_answers = [dict objectForKey:@"answers"];
+        NSMutableArray* array_answers = [NSMutableArray arrayWithCapacity:[rawArray_answers count]];
+        for (NSDictionary* sub_answers in rawArray_answers)
+        {
+            Answer* item = [[Answer alloc] initWithDictionary:sub_answers];
+            [array_answers addObject:item];
+        }
+        self.answers = array_answers;
+        
+    }
+    return self;
+}
+
 - (instancetype)initWithQuestion:(NSString *)question
                         withType:(QuestionType) quetionType
 {

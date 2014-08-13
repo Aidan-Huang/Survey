@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, QuestionType) {
 - (NSArray *)getNeedSelectAnswersWhenSelectedAt:(NSInteger) index;
 - (NSArray *)getNeedCancelSelectAnswersWhenSelectedAt:(NSInteger) index;
 
+
+- (id)initWithDictionary:(NSDictionary*)dict;
 - (instancetype)initWithQuestion:(NSString *)question
                         withType:(QuestionType) quetionType;
 

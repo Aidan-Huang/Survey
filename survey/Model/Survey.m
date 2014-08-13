@@ -10,6 +10,27 @@
 
 @implementation Survey
 
+
+- (id)initWithDictionary:(NSDictionary*)dict
+{
+    if (self = [super init])
+    {
+        self.title = [dict objectForKey:@"title"];
+        self.details = [dict objectForKey:@"detail"];
+        
+        NSArray* rawArray_questions = [dict objectForKey:@"questions"];
+        NSMutableArray* array_questions = [NSMutableArray arrayWithCapacity:[rawArray_questions count]];
+        for (NSDictionary* sub_questions in rawArray_questions)
+        {
+            Question* item = [[Question alloc] initWithDictionary:sub_questions];
+            [array_questions addObject:item];
+        }
+        self.questions = array_questions;
+        
+    }
+    return self;
+}
+
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super init];
