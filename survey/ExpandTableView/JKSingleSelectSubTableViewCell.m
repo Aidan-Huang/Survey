@@ -23,7 +23,7 @@
         isSwitchedOn = NO;
     } else {
         cell.selectionIndicatorImg.hidden = NO;
-        cell.backgroundColor = SELECTED_COLOR;
+        cell.backgroundColor = self.selectedColor;
         isSwitchedOn = YES;
         
         // deselect previously selected siblings

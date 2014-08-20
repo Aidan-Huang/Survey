@@ -57,6 +57,13 @@
  @return UIImage
  */
 - (UIImage *) selectionIndicatorIcon;
+
+/*! Optional method to set a custom selected childCell color.
+ 
+ @return UIColor
+ */
+- (UIColor *) selectedColor;
+
 /*! Optional method to set custom font for the labels on the Parent cells.
 
  @return UIFont for the label on the parent cells

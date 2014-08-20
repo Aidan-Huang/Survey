@@ -205,6 +205,11 @@
                 [cell setSubTableForegroundColor:fgColor];
             }
             
+            if ([self.tableViewDelegate respondsToSelector:@selector(selectedColor)]) {
+                UIColor *selectedColor = [self.tableViewDelegate selectedColor];
+                [cell setSelectedColor:selectedColor];
+            }
+            
             if ([self.tableViewDelegate respondsToSelector:@selector(selectionIndicatorIcon)]) {
                 [cell setSelectionIndicatorImg:[self.tableViewDelegate selectionIndicatorIcon]];
             }
@@ -230,6 +235,11 @@
             if ([self.tableViewDelegate respondsToSelector:@selector(foregroundColor)]) {
                 UIColor * fgColor = [self.tableViewDelegate foregroundColor];
                 [cell setSubTableForegroundColor:fgColor];
+            }
+            
+            if ([self.tableViewDelegate respondsToSelector:@selector(selectedColor)]) {
+                UIColor *selectedColor = [self.tableViewDelegate selectedColor];
+                [cell setSelectedColor:selectedColor];
             }
             
             if ([self.tableViewDelegate respondsToSelector:@selector(selectionIndicatorIcon)]) {

@@ -69,6 +69,10 @@
 // return [UIColor grayColor];
 // }
 
+- (UIColor *) selectedColor{
+    return [UIColor orangeColor];
+}
+
 - (UIFont *) fontForParents {
     return [UIFont fontWithName:@"American Typewriter" size:20];
 }
@@ -118,6 +122,7 @@
 - (BOOL) shouldRotateIconForParentOnToggle {
     return YES;
 }
+
 
 - (void) getSurveyFromJSON{
     

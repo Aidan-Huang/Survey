@@ -25,7 +25,7 @@
     } else {
         cell.selectionIndicatorImg.hidden = false;
         
-        cell.backgroundColor = SELECTED_COLOR;
+        cell.backgroundColor = self.selectedColor;
         isSwitchedOn = YES;
     }
     

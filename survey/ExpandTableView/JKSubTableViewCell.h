@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define SELECTED_COLOR [UIColor orangeColor]
 
 @protocol JKSubTableViewCellDelegate <NSObject>
 // return total number of children under this parentIndex
@@ -35,6 +34,7 @@
     __weak id delegate;
     UIColor *bgColor;
     UIColor *fgColor;
+    UIColor *selectedColor;
     UIFont *font;
     UIImage *selectionIndicatorImg;
 }
@@ -46,6 +46,7 @@
 
 @property(nonatomic,strong,getter = getSubTableForegroundColor, setter = setSubTableForegroundColor:) UIColor *fgColor;
 @property(nonatomic,strong,getter = getSubTableBackgroundColor, setter = setSubTableBackgroundColor:) UIColor *bgColor;
+@property(nonatomic,strong) UIColor *selectedColor;
 @property(nonatomic,strong,getter = getSubTableFont, setter = setSubTableFont:) UIFont *font;
 
 - (UIImage *) selectionIndicatorImgOrDefault;

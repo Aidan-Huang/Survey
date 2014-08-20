@@ -116,7 +116,7 @@
     
     if (isRowSelected) {
         cell.selectionIndicatorImg.hidden = NO;
-        cell.backgroundColor = SELECTED_COLOR;
+        cell.backgroundColor = self.selectedColor;
     } else {
         cell.selectionIndicatorImg.hidden = YES;
     }
